@@ -11,18 +11,13 @@ import Counter from '../components/Counter';
 import  * as aboutAction from '../redux/modules/about';
 // const ajax = new isomorphicFetch();
 class About extends Component {
-    static async  getInitialProps({ store, isServer, pathname, query }) {
+    static async  getInitialProps({ store, isServer, pathname }) {
         const { getProduct, addCount} = aboutAction;
         const action = getProduct();
 
         if (isServer) {
-            store.dispatch( action);
-               
-            return store.dispatch(action).then((r)=>{
-                  
-                    return {custom: 'custom server',isServer};
-            });
-         
+            await store.dispatch(action);
+            return {custom: 'custom server',isServer}; 
         }
         store.dispatch( action);
        return {custom: 'custom client',isServer};
@@ -30,11 +25,11 @@ class About extends Component {
     }
 
     componentDidMount() {
-       
+      
     }
 
     render() {
-        console.log(this.props.about.product.data.title)
+     
         return(
             <Main>
                 <section>
@@ -44,6 +39,7 @@ class About extends Component {
                         {`is from ${(this.props.isServer)? 'Server' : 'Client'}`}
                         <p>{`${this.props.custom}`}</p>
                         <p>{`flag = ${this.props.about.product.flag}`}</p>
+                        <p>{`title = ${(this.props.about.product.flag)?this.props.about.product.data.title: ''}`}</p>
                     </div>
                 </section>
                 

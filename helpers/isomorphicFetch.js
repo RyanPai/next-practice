@@ -25,45 +25,26 @@ export default class isomorphicFetch {
       
         methods.forEach((method) =>
          
-        this[method] = (path, { params, data } = {}) => {
-           
+        this[method] = async (path, { params, data } = {}) => {
+            let request,res;
             // const request = fetch[method](formatUrl(path)); 
-            const request =  fetch(path,{
-                method: method,
-            })
-            .then((res) => {
-                return res.json();
-            })
-            .catch(error => {
-                return error
-            })
-            // console.log(request)
-            return request;
+           
+            try {
+                request = await fetch(path,{
+                    method: method,
+                });
+
+                res = await request.json()
+            } 
+            catch(e) {
+                console.log(e);
+            }
+           
+            return res;
            
            
         });
 
-        /* methods.forEach((method) =>
-            this[method] = (path, { params, data } = {}) => new Promise((resolve, reject) => {
-                // const request = superagent[method](formatUrl(path));
-                const request = fetch(path,{
-                    method: method,
-                })
-
-
-                return request;
-                
-                // .then((res) => {
-                //     reject(res)
-                //     // return res.json();
-                // })
-                // .catch(error => {
-                //     console.log(error)
-                //     resolve(error)
-                //     // return error
-                // })
-              
-            }));*/
       
         
     }

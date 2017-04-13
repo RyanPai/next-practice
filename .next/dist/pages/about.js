@@ -81,43 +81,48 @@ var About = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
-            console.log(this.props.about.product.data.title);
+
             return _react2.default.createElement(_Main2.default, {
                 __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 39
+                    lineNumber: 34
                 }
             }, _react2.default.createElement('section', {
                 __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 40
+                    lineNumber: 35
                 }
             }, _react2.default.createElement(_Counter2.default, {
                 __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 41
+                    lineNumber: 36
                 }
             }), _react2.default.createElement('div', {
                 __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 42
+                    lineNumber: 37
                 }
             }, _react2.default.createElement('h1', {
                 __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 43
+                    lineNumber: 38
                 }
             }, 'About'), 'is from ' + (this.props.isServer ? 'Server' : 'Client'), _react2.default.createElement('p', {
                 __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 45
+                    lineNumber: 40
                 }
             }, '' + this.props.custom), _react2.default.createElement('p', {
                 __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 46
+                    lineNumber: 41
                 }
-            }, 'flag = ' + this.props.about.product.flag))));
+            }, 'flag = ' + this.props.about.product.flag), _react2.default.createElement('p', {
+                __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 42
+                }
+            }, 'title = ' + (this.props.about.product.flag ? this.props.about.product.data.title : '')))));
         }
     }], [{
         key: 'getInitialProps',
@@ -125,8 +130,7 @@ var About = function (_Component) {
             var _ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee(_ref2) {
                 var store = _ref2.store,
                     isServer = _ref2.isServer,
-                    pathname = _ref2.pathname,
-                    query = _ref2.query;
+                    pathname = _ref2.pathname;
                 var getProduct, addCount, action;
                 return _regenerator2.default.wrap(function _callee$(_context) {
                     while (1) {
@@ -136,22 +140,21 @@ var About = function (_Component) {
                                 action = getProduct();
 
                                 if (!isServer) {
-                                    _context.next = 5;
+                                    _context.next = 6;
                                     break;
                                 }
 
-                                store.dispatch(action);
-
-                                return _context.abrupt('return', store.dispatch(action).then(function (r) {
-
-                                    return { custom: 'custom server', isServer: isServer };
-                                }));
+                                _context.next = 5;
+                                return store.dispatch(action);
 
                             case 5:
+                                return _context.abrupt('return', { custom: 'custom server', isServer: isServer });
+
+                            case 6:
                                 store.dispatch(action);
                                 return _context.abrupt('return', { custom: 'custom client', isServer: isServer });
 
-                            case 7:
+                            case 8:
                             case 'end':
                                 return _context.stop();
                         }
